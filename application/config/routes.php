@@ -56,11 +56,19 @@ $route['login/submit'] = 'LoginController/submit';
 $route['logout'] = 'LogoutController/index';  // Maps the logout URL to LogoutController
 
 
-$route['dashboard'] = 'DashboardController/index';
-$route['profile'] = 'ProfileController/view'; // View profile
-$route['profile/edit'] = 'ProfileController/edit'; // Edit profile
-$route['profile/update'] = 'ProfileController/update'; // Update profile details
-$route['profile/upload_photo'] = 'ProfileController/upload_photo'; // Upload profile photo
+$route['dashboard'] = 'DashboardController/index';          // Dashboard route
+$route['profile'] = 'ProfileController/view';                // Profile page route
+$route['profile/edit'] = 'ProfileController/edit';
+$route['profile/update'] = 'ProfileController/update';
+       // Update Profile route
+$route['profile/upload_photo'] = 'ProfileController/upload_photo'; // Photo upload
+$route['profile/subscribe'] = 'ProfileController/subscribe'; // Subscription route
+
+ // Handle subscription
+// Upload profile photo
+$route['photo/upload_file/(:num)'] = 'PhotoUploadController/upload_file/$1';
+
+// $route['photo']='PhotoUploadController/upload_file'
 
 // Interest routes (for sending, accepting, rejecting, blocking)
 $route['interest'] = 'interestController/index'; // Load interests page

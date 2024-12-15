@@ -47,14 +47,18 @@ class UserModel extends CI_Model {
     //     return $this->db->get_where('users', ['gender' => $gender, 'id !=' => $exclude_user_id])->result();
     // }
 
-    public function update_user_photo($user_id, $photo_path) {
-        // Update the photo_path in the users table
+    public function updated_user_image($id, $file_path) {
         $data = [
-            'photo_path' => $photo_path
+            'photo_path' => $file_path
         ];
-
-        $this->db->where('id', $user_id);
+    
+        $this->db->where('id', $id);
         return $this->db->update($this->table, $data);
+    }
+    
+    public function update_user($user_id, $data) {
+        $this->db->where('id', $user_id);
+        return $this->db->update('users', $data);
     }
 
 

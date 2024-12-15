@@ -48,6 +48,7 @@ class DashboardController extends BaseController {
     
         // Load views
         $this->load->view('layouts/header');
+        $this->load->view('partials/navbar');
         $this->load->view('dashboard/dashboardView', $data);
         $this->load->view('layouts/footer');
     }

@@ -125,7 +125,7 @@
                     <li><a href="<?php echo base_url('dashboard'); ?>">Dashboard</a></li>
                 
                 <!-- Profile link -->
-                <li><a href="<?php echo base_url('profile/view'); ?>">Profile</a></li>
+                <li><a href="<?php echo base_url('profile'); ?>">Profile</a></li>
 
                 <!-- Interests link -->
                 <li><a href="<?php echo base_url('interest'); ?>">Interests</a></li>

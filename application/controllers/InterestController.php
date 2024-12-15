@@ -77,26 +77,55 @@ class InterestController extends BaseController {
     
     
 
+    // public function load_incoming_interests() {
+    //     $user_id = $this->session->userdata('user_id');
+        
+    //     // Get all pending interests sent to the logged-in user
+    //     $interests = $this->db->get_where('interests', ['receiver_id' => $user_id, 'status' => 'pending'])->result();
+
+    //     $this->load->view('partials/navbar');
+
+    //     if ($interests) {
+    //         foreach ($interests as $interest) {
+    //             $sender = $this->UserModel->get_user_by_id($interest->sender_id);
+    //             echo "<div class='interest-item'>
+    //                     <p>User " . $sender->name . " has sent you an interest.</p>
+    //                     <button class='respond-interest accept' data-interest-id='" . $interest->id . "' data-response='accept'>Accept</button>
+    //                     <button class='respond-interest reject' data-interest-id='" . $interest->id . "' data-response='reject'>Reject</button>
+    //                     <button class='respond-interest block' data-interest-id='" . $interest->id . "' data-response='block'>Block</button>
+    //                   </div>";
+    //         }
+    //     } else {
+    //         echo "<p>No incoming interest requests.</p>";
+    //     }
+    // }
+
     public function load_incoming_interests() {
         $user_id = $this->session->userdata('user_id');
         
         // Get all pending interests sent to the logged-in user
         $interests = $this->db->get_where('interests', ['receiver_id' => $user_id, 'status' => 'pending'])->result();
-
+    
+        $this->load->view('partials/navbar');
+    
         if ($interests) {
             foreach ($interests as $interest) {
                 $sender = $this->UserModel->get_user_by_id($interest->sender_id);
-                echo "<div class='interest-item'>
-                        <p>User " . $sender->name . " has sent you an interest.</p>
-                        <button class='respond-interest accept' data-interest-id='" . $interest->id . "' data-response='accept'>Accept</button>
-                        <button class='respond-interest reject' data-interest-id='" . $interest->id . "' data-response='reject'>Reject</button>
-                        <button class='respond-interest block' data-interest-id='" . $interest->id . "' data-response='block'>Block</button>
+                echo "<div class='interest-card'>
+                        <h3>User " . $sender->name . " has sent you an interest.</h3>
+                        <p>Would you like to respond to their interest?</p>
+                        <div class='respond-buttons'>
+                            <button class='respond-interest accept' data-interest-id='" . $interest->id . "' data-response='accept'>Accept</button>
+                            <button class='respond-interest reject' data-interest-id='" . $interest->id . "' data-response='reject'>Reject</button>
+                            <button class='respond-interest block' data-interest-id='" . $interest->id . "' data-response='block'>Block</button>
+                        </div>
                       </div>";
             }
         } else {
             echo "<p>No incoming interest requests.</p>";
         }
     }
+    
 
 
     public function respond_interest($interest_id, $response) {
