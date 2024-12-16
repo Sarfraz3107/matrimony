@@ -93,19 +93,19 @@ class ProfileController extends BaseController {
     
 
     
-    public function subscribe() {
-        // Subscription upgrade logic
-        $user_id = $this->session->userdata('user_id');
-        $subscription_type = $this->input->post('subscription_type');
+    // public function subscribe() {
+    //     // Subscription upgrade logic
+    //     $user_id = $this->session->userdata('user_id');
+    //     $subscription_type = $this->input->post('subscription_type');
 
-        if ($subscription_type && $this->UserModel->update_user($user_id, ['subscription_type' => $subscription_type])) {
-            $this->session->set_userdata('subscription_type', $subscription_type);
-            redirect('profile');
-        } else {
-            $this->session->set_flashdata('error', 'Subscription upgrade failed.');
-            redirect('profile');
-        }
-    }
+    //     if ($subscription_type && $this->UserModel->update_user($user_id, ['subscription_type' => $subscription_type])) {
+    //         $this->session->set_userdata('subscription_type', $subscription_type);
+    //         redirect('profile');
+    //     } else {
+    //         $this->session->set_flashdata('error', 'Subscription upgrade failed.');
+    //         redirect('profile');
+    //     }
+    // }
 
 
     

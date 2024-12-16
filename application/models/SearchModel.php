@@ -1,73 +1,80 @@
-
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
 
 class SearchModel extends CI_Model {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->load->database();
     }
 
-    // Insert a new user into the search table based on gender and marital status
-    public function insert_user($user_id, $gender = null, $marital_status = null)
-    {
-        log_message('debug', "User ID: " . $user_id);
-        log_message('debug', "Gender: " . $gender);
-        log_message('debug', "Marital Status: " . $marital_status);
-    
-        // Gender Insert/Update
-        if ($gender !== null) {
-            $gender_id = ($gender == 1) ? 1 : 2;  // Gender 1 for Male, 2 for Female
+    public function insert_or_update_user($user_id, $gender, $marital_status) {
 
-            // Check if the record for the gender exists
-            $this->db->where('id', $gender_id);
-            $query = $this->db->get('search');
+        // Determine gender_table_id based on gender input (1 for male, 2 for female)
+        if ($gender == 1) {
+            $gender_table_id = 1; // Male
+        } elseif ($gender == 2) {
+            $gender_table_id = 2; // Female
+        } else {
+            $gender_table_id = null;
+            log_message('error', 'Invalid gender value passed.');
+        }
 
-            if ($query->num_rows() == 0) {
-                // Insert a new record if it doesn't exist
-                $data = [
-                    'id' => $gender_id,
-                    'gender' => json_encode([$user_id])
-                ];
-                if ($this->db->insert('search', $data)) {
-                    log_message('debug', 'New gender record inserted');
-                } else {
-                    log_message('error', 'Failed to insert gender record');
+        if ($gender_table_id !== null) {
+            // Check if gender row exists in the table
+            $this->db->select('gender, marital_status');
+            $this->db->where('table_id', $gender_table_id);
+            $query = $this->db->get('search_table');
+
+            if ($query->num_rows() > 0) {
+                // Row exists, update the gender array
+                $row = $query->row();
+                $gender_ids = json_decode($row->gender, true);
+                if (!in_array($user_id, $gender_ids)) {
+                    $gender_ids[] = $user_id;
+                    $this->db->where('table_id', $gender_table_id);
+                    $this->db->update('search_table', ['gender' => json_encode($gender_ids)]);
                 }
             } else {
-                // Update existing record by appending the user ID to the gender field
-                $sql = "UPDATE search SET gender = JSON_ARRAY_APPEND(gender, '$', ?) WHERE id = ?";
-                $this->db->query($sql, [$user_id, $gender_id]);
-                log_message('debug', 'Updated gender record');
+                // Row does not exist, insert new row
+                $data = [
+                    'table_id' => $gender_table_id,
+                    'gender' => json_encode([$user_id]),
+                    'marital_status' => '[]' // Empty marital_status array initially
+                ];
+                $this->db->insert('search_table', $data);
             }
         }
-    
-        // Marital Status Insert/Update
-        if ($marital_status !== null) {
-            // Check if the record for the marital status exists
-            $this->db->where('id', $marital_status);
-            $query = $this->db->get('search');
-            log_message('debug', "Marital Status query result: " . print_r($query->result_array(), true));
 
-            if ($query->num_rows() == 0) {
-                // Insert a new record if it doesn't exist
-                $data = [
-                    'id' => $marital_status,
-                    'marital_status' => json_encode([$user_id])
-                ];
-                if ($this->db->insert('search', $data)) {
-                    log_message('debug', 'New marital status record inserted');
-                } else {
-                    log_message('error', 'Failed to insert marital status record');
-                }
-            } else {
-                // Update existing record by appending the user ID to the marital_status field
-                $sql = "UPDATE search SET marital_status = JSON_ARRAY_APPEND(marital_status, '$', ?) WHERE id = ?";
-                $this->db->query($sql, [$user_id, $marital_status]);
-                log_message('debug', 'Updated marital status record');
+        // Now handle marital status
+        $this->update_marital_status($user_id, $marital_status);
+    }
+
+    private function update_marital_status($user_id, $row_id) {
+
+        // Check if marital status row exists in the table
+        $this->db->select('marital_status');
+        $this->db->where('table_id', $row_id);
+        $query = $this->db->get('search_table');
+
+        if ($query->num_rows() > 0) {
+            // Row exists, update marital status array
+            $row = $query->row();
+            $marital_status_ids = json_decode($row->marital_status, true);
+            if (!in_array($user_id, $marital_status_ids)) {
+                $marital_status_ids[] = $user_id;
+                $this->db->where('table_id', $row_id);
+                $this->db->update('search_table', ['marital_status' => json_encode($marital_status_ids)]);
+                log_message('debug', 'Marital status IDs updated: ' . print_r($marital_status_ids, true));
             }
+        } else {
+            // Row does not exist, insert new row for marital status
+            log_message('debug', 'No marital status row found. Inserting new row for marital status row_id ' . $row_id);
+            $data = [
+                'table_id' => $row_id,
+                'gender' => null, // Gender is not applicable for marital status rows
+                'marital_status' => json_encode([$user_id])
+            ];
+            $this->db->insert('search_table', $data);
         }
     }
 }
