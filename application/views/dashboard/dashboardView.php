@@ -7,126 +7,203 @@
 
     <title>Dashboard</title>
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-        }
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
 
-        .container {
-            width: 80%;
-            margin: 30px auto;
-            background-color: #fff;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+/* Container for the Dashboard */
+.container {
+    width: 80%;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
 
-        h2 {
-            text-align: center;
-            color: #333;
-            font-size: 28px;
-        }
+/* Title Styling */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+}
 
-        h3 {
-            margin-top: 30px;
-            color: #555;
-            font-size: 22px;
-        }
+/* Sub-Title Styling */
+h3 {
+    margin-top: 30px;
+    color: #555;
+    font-size: 22px;
+    font-weight: 500;
+}
 
-        .profile {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+/* Profile Card */
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
 
-        .profile p {
-            margin: 0;
-            font-size: 16px;
-            color: #333;
-        }
+/* Hover Effect for Profile Card */
+.profile:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
 
-        .profile .btn {
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+/* Profile Text Styling */
+.profile p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
 
-        .profile .btn:hover {
-            background-color: #45a049;
-            cursor: pointer;
-        }
+/* Profile Button Styling */
+.profile .btn {
+    display: inline-block;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    border-radius: 50px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Smooth transition for hover and focus */
+}
 
-        .btn-disabled {
-            background-color: #ccc; /* Light gray background to indicate disabled state */
-            color: #666; /* Dark gray text color */
-            border: 1px solid #999; /* Gray border */
-            cursor: not-allowed; /* Correct cursor to indicate it is not clickable */
-            opacity: 0.6; /* Slightly transparent to reinforce disabled look */
-            padding: 10px 15px; /* Consistent padding */
-            font-size: 14px; /* Text size */
-            border-radius: 5px; /* Rounded corners */
-            text-align: center; /* Center-align text */
-            pointer-events: none; /* Ensures it is not clickable */
-            transition: opacity 0.3s ease; /* Smooth transition for hover effect */
-        }
+/* Button Hover Effect */
+.profile .btn:hover {
+    background-color: #45a049; /* Slightly darker green */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
 
-        /* Modal (Popup) Styles */
-        #popup {
+/* Button Focus Effect (for accessibility) */
+.profile .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.4); /* Green outline */
+}
+
+/* Button Active Effect (when clicked) */
+.profile .btn:active {
+    transform: translateY(2px); /* Pressed down effect */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Shadow contracts */
+}
+
+/* Disabled State for Buttons */
+.profile .btn-disabled {
+    background-color: #ccc; /* Light gray background */
+    color: #666; /* Dark gray text */
+    border: 1px solid #999; /* Gray border */
+    cursor: not-allowed;
+    opacity: 0.6;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 50px;
+    box-shadow: none;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Modal (Popup) Styles */
+#popup {
     display: none;
     position: fixed;
-    top: 50%; /* Vertically center */
-    left: 50%; /* Horizontally center */
+    top: 50%;
+    left: 50%;
     width: 40%;
     height: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.popup-content h3 {
+    margin: 0;
+    color: #4CAF50;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.popup-content button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-content button:hover {
+    background-color: #45a049;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .profile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile .btn {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .popup-content {
+        width: 80%;
+        padding: 15px;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
 
-        .popup-content {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .popup-content h3 {
-            margin: 0;
-            color: #4CAF50;
-        }
-
-        /* Mobile Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-
-            .profile {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .profile .btn {
-                margin-top: 10px;
-                width: 100%;
-                text-align: center;
-                cursor: pointer;
-            }
-        }
     </style>
 </head>
 <body>
@@ -181,7 +258,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.status === 200) {
-                    showPopup();
+                    showPopup(); // Show the success popup
                     button.removeClass('send-interest-btn').addClass('btn-disabled')
                         .prop('disabled', true).text('Already Interest Sent');
                 } else {
@@ -199,12 +276,18 @@ $(document).ready(function() {
 // Global function to show the popup
 function showPopup() {
     $('#popup').fadeIn();
+
+    // Auto-close the popup after 3 seconds (3000 milliseconds)
+    setTimeout(function() {
+        $('#popup').fadeOut();
+    }, 500);
 }
 
-// Global function to close the popup
+// Global function to close the popup manually (if needed)
 function closePopup() {
     $('#popup').fadeOut();
 }
+
 </script>
 </body>
 </html>
