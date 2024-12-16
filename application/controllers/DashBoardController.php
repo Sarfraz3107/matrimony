@@ -8,6 +8,7 @@ class DashboardController extends BaseController {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('InterestModel');
+        $this->load->model('userModel');
         // Additional initialization if needed
     }
 
@@ -52,6 +53,23 @@ class DashboardController extends BaseController {
         $this->load->view('dashboard/dashboardView', $data);
         $this->load->view('layouts/footer');
     }
+
+    public function profile_details($id) {
+        // Fetch the profile data from the database using the ID
+        $profile = $this->userModel->get_profile_by_id($id);
+    
+        // Debugging: print the profile data
+        if ($profile) {
+            // Pass the profile as an associative array to the view
+            $data['profile'] = $profile; // Store the profile data in the $data array
+            $this->load->view('profile/profileDetailsView', $data); // Pass $data to the view
+        } else {
+            echo "Profile not found.";
+        }
+    
+    }
+    
+    
     
 
 

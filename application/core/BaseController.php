@@ -17,19 +17,31 @@ class BaseController extends CI_Controller {
 
     private function check_login() {
         if (!$this->session->userdata('logged_in')) {
-            redirect('login');
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['status' => 'error', 'message' => 'Session expired, please login again.']);
+                exit;  // Stop further execution
+            } else {
+                redirect('login');
+            }
         }
     }
+    
 
     private function validate_session() {
         $current_time = time();
         $last_activity = $this->session->userdata('last_activity');
-        $timeout_duration = 100;
-
+        $timeout_duration = 900;  // 15 minutes timeout
+    
         if (!$last_activity || ($current_time - $last_activity > $timeout_duration)) {
-            redirect('login');
+            if ($this->input->is_ajax_request()) {
+                echo json_encode(['status' => 'error', 'message' => 'Session expired, please login again.']);
+                exit;  // Stop further execution
+            } else {
+                redirect('login');
+            }
         }
-
+    
         $this->session->set_userdata('last_activity', $current_time);
     }
+    
 }

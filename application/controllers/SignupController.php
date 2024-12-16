@@ -29,15 +29,33 @@ class SignupController extends CI_Controller {
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('property_owner', 'Property Owner', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-
+    
+        // If validation fails
         if ($this->form_validation->run() === FALSE) {
-            // Return JSON error messages for validation failures
-            // echo json_encode([
-            //     'status' => 'error',
-            //     'message' => validation_errors()
-            // ]);
+            // Collect validation errors
+            $errors = [];
+            foreach ($_POST as $key => $value) {
+                $errors[$key] = form_error($key); // Collecting each field error
+            }
+            
+            // Return error response in JSON format
+            $this->output->set_content_type('application/json')->set_output(json_encode([
+                'status' => 'error',
+                'errors' => $errors
+            ]));
         } else {
             // Prepare form data
+            $password = $this->input->post('password');
+            if (empty($password)) {
+                $this->output->set_content_type('application/json')->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => 'Password is required.'
+                ]));
+                return;
+            }
+    
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    
             $formData = [
                 'name' => $this->input->post('name'),
                 'email' => $this->input->post('email'),
@@ -48,44 +66,42 @@ class SignupController extends CI_Controller {
                 'education' => $this->input->post('education'),
                 'gender' => $this->input->post('gender'),
                 'property_owner' => $this->input->post('property_owner'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'password' => $hashed_password,
                 'subscription_type' => 'free'
             ];
-
-            // Attempt to insert the user into the database
+    
+            // Attempt to insert user into the database
             $user_id = $this->UserModel->insert_user($formData);
-
-
+    
             if ($user_id) {
-
-                $this->SearchModel->insert_user($user_id, $formData['gender'], $formData['marital_status']);
                 // Set session data
                 $user_data = [
                     'user_id' => $user_id,
                     'name' => $formData['name'],
                     'logged_in' => TRUE,
-                    'last_activity' => time() // Add current timestamp for last activity
+                    'last_activity' => time()
                 ];
-
                 $this->session->set_userdata($user_data);
                 $this->session->sess_regenerate(TRUE); // Regenerate session ID for security
-
-                redirect('dashboard');
-
-                // Return success response
-                // echo json_encode([
-                //     'status' => 'success',
-                //     'redirect' => base_url('dashboard')
-                // ]);
+    
+                // Return success response with user data and redirect URL
+                $this->output->set_content_type('application/json')->set_output(json_encode([
+                    'status' => 'success',
+                    'message' => 'User successfully created.',
+                    'data' => $formData,
+                    'redirect' => base_url('dashboard')
+                ]));
             } else {
-                // Return error response if insertion fails
-                // echo json_encode([
-                //     'status' => 'error',
-                //     'message' => 'Failed to create user. Please try again later.'
-                // ]);
+                // Failed to create user
+                $this->output->set_content_type('application/json')->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => 'Failed to create user. Please try again later.'
+                ]));
             }
         }
     }
-
     
+    
+
+
 }

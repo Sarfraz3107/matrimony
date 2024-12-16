@@ -137,20 +137,22 @@
 
     <?php if ($profiles): ?>
         <?php foreach ($profiles as $profile): ?>
-        <div class="profile" id="profile-<?php echo $profile->id; ?>">
-            <div class="profile-details">
-                <p><strong>Name:</strong> <?php echo $profile->name; ?></p>
-                <p><strong>Age:</strong> <?php echo $profile->age; ?></p>
-                <p><strong>Gender:</strong> <?php echo $profile->gender == 1 ? 'Male' : 'Female'; ?></p>
-            </div>
-            <div class="profile-actions">
-                <?php if ($profile->interest_sent): ?>
-                    <button class="btn btn-disabled" disabled>Already Interest Sent</button>
-                <?php else: ?>
-                    <button class="btn send-interest-btn" data-profile-id="<?php echo $profile->id; ?>">Send Interest</button>
-                <?php endif; ?>
-            </div>
-        </div>
+            <div class="profile" id="profile-<?php echo $profile->id; ?>">
+    <div class="profile-details">
+        <p><strong>Name:</strong> <?php echo $profile->name; ?></p>
+        <p><strong>Age:</strong> <?php echo $profile->age; ?></p>
+        <p><strong>Gender:</strong> <?php echo $profile->gender == 1 ? 'Male' : 'Female'; ?></p>
+        <!-- Link to the profile details page -->
+        <a href="<?php echo base_url('profile/details/' . $profile->id); ?>" class="btn">View Details</a>
+    </div>
+    <div class="profile-actions">
+        <?php if ($profile->interest_sent): ?>
+            <button class="btn btn-disabled" disabled>Already Interest Sent</button>
+        <?php else: ?>
+            <button class="btn send-interest-btn" data-profile-id="<?php echo $profile->id; ?>">Send Interest</button>
+        <?php endif; ?>
+    </div>
+</div>
         <?php endforeach; ?>
     <?php endif; ?>
 </div>

@@ -126,9 +126,9 @@
                 
                 <!-- Profile link -->
                 <li><a href="<?php echo base_url('profile'); ?>">Profile</a></li>
-
+                <li><a href="<?php echo base_url('interests/sent'); ?>">send Interest </a></li>
                 <!-- Interests link -->
-                <li><a href="<?php echo base_url('interest'); ?>">Interests</a></li>
+                <li><a href="<?php echo base_url('interest'); ?>">Recieve Interests</a></li>
                     <li><a href="<?php echo base_url('logout'); ?>" class="logout-btn">Logout</a></li>
                 <?php else: ?>
                     <!-- Login and Signup links for non-logged-in users -->

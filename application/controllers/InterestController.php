@@ -151,5 +151,26 @@ class InterestController extends BaseController {
         }
     }
 
+
+    public function sent_interests() {
+        $sender_id = $this->session->userdata('user_id');
+    
+        // Query to fetch all users to whom the logged-in user has sent an interest
+        $this->db->select('interests.*, users.id AS receiver_id, users.name, users.email, users.age, users.education, users.gender');
+        $this->db->from('interests');
+        $this->db->join('users', 'users.id = interests.receiver_id'); // Get user details of the receiver
+        $this->db->where('interests.sender_id', $sender_id);
+        $this->db->where_in('interests.status', ['pending', 'accepted', 'rejected', 'blocked']); // Filter based on status
+        $query = $this->db->get();
+    
+        $interests = $query->result();
+    
+        // Pass the data to the view
+        $data['interests'] = $interests;
+        $this->load->view('partials/navbar');
+        $this->load->view('interest/sentInterests', $data);
+    }
+    
+
 }
 ?>

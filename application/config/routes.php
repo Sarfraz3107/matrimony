@@ -55,8 +55,9 @@ $route['login'] = 'LoginController/index';
 $route['login/submit'] = 'LoginController/submit';
 $route['logout'] = 'LogoutController/index';  // Maps the logout URL to LogoutController
 
+$route['dashboard'] = 'DashboardController/index'; // This route should point to the Dashboard index method
+$route['profile/details/(:num)'] = 'DashboardController/profile_details/$1';
 
-$route['dashboard'] = 'DashboardController/index';          // Dashboard route
 $route['profile'] = 'ProfileController/view';                // Profile page route
 $route['profile/edit'] = 'ProfileController/edit';
 $route['profile/update'] = 'ProfileController/update';
@@ -81,9 +82,10 @@ $route['interests/accept/(:num)'] = 'InterestController/respond_interest/$1/acce
 $route['interests/reject/(:num)'] = 'InterestController/respond_interest/$1/reject'; // Reject interest (by ID)
 $route['interests/block/(:num)'] = 'InterestController/respond_interest/$1/block';
 $route['interests/respond/(:num)/(:any)'] = 'InterestController/respond_interest/$1/$2'; // Respond to an interest (accept/reject/block)
+$route['interests/sent'] = 'InterestController/sent_interests';
 
 
-$route['dashboard'] = 'DashBoardController/index';
+// $route['dashboard'] = 'DashBoardController/index';
 
 
 $route['404_override'] = '';

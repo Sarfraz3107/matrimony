@@ -14,7 +14,7 @@ class UserModel extends CI_Model {
     // Function to insert user data into the database
     public function insert_user($data) {
         // Insert the user data and return the result
-        print_r($data);
+        // print_r($data);
         $this->db->insert($this->table, $data);
         return $this->db->insert_id(); // Return the ID of the inserted user
     }
@@ -60,6 +60,17 @@ class UserModel extends CI_Model {
         $this->db->where('id', $user_id);
         return $this->db->update('users', $data);
     }
+
+    public function get_profile_by_id($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('users');  // Ensure the table name is correct
+
+        if ($query->num_rows() > 0) {
+            return $query->row();  // Return a single row if profile is found
+        }
+        return null;  // Return null if no profile is found
+    }
+    
 
 
 

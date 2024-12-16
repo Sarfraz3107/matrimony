@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
     <title>Signup Form</title>
     <style>
         body {
@@ -64,125 +63,135 @@
 <body>
     <div class="container">
         <h1>Signup Form</h1>
-        <?php echo form_open('signup/submit', ['id' => 'signupForm', 'method' => 'POST']); ?>
+        <form id="signupForm" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name">
+                <div class="error" id="nameError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="<?php echo set_value('name'); ?>">
-            <div class="error"><?php echo form_error('name'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+                <div class="error" id="emailError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" value="<?php echo set_value('email'); ?>">
-            <div class="error"><?php echo form_error('email'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="marital_status">Marital Status:</label>
+                <select name="marital_status" id="marital_status">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="1">Never Married</option>
+                    <option value="2">Married</option>
+                    <option value="3">Divorced</option>
+                    <option value="4">Separated</option>
+                </select>
+                <div class="error" id="maritalStatusError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="marital_status">Marital Status:</label>
-            <select name="marital_status" id="marital_status">
-                <option value="" disabled selected>Select an option</option>
-                <option value="1" <?php echo set_select('marital_status', '1'); ?>>Never Married</option>
-                <option value="2" <?php echo set_select('marital_status', '2'); ?>>Married</option>
-                <option value="3" <?php echo set_select('marital_status', '3'); ?>>Divorced</option>
-                <option value="4" <?php echo set_select('marital_status', '4'); ?>>Separated</option>
-            </select>
-            <div class="error"><?php echo form_error('marital_status'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="on_behalf">On Behalf:</label>
+                <select name="on_behalf" id="on_behalf">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Self">Self</option>
+                    <option value="Daughter">Daughter</option>
+                    <option value="Son">Son</option>
+                    <option value="Brother">Brother</option>
+                    <option value="Sister">Sister</option>
+                </select>
+                <div class="error" id="onBehalfError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="on_behalf">On Behalf:</label>
-            <select name="on_behalf" id="on_behalf">
-                <option value="" disabled selected>Select an option</option>
-                <option value="Self" <?php echo set_select('on_behalf', 'Self'); ?>>Self</option>
-                <option value="Daughter" <?php echo set_select('on_behalf', 'Daughter'); ?>>Daughter</option>
-                <option value="Son" <?php echo set_select('on_behalf', 'Son'); ?>>Son</option>
-                <option value="Brother" <?php echo set_select('on_behalf', 'Brother'); ?>>Brother</option>
-                <option value="Sister" <?php echo set_select('on_behalf', 'Sister'); ?>>Sister</option>
-            </select>
-            <div class="error"><?php echo form_error('on_behalf'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age">
+                <div class="error" id="ageError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="number" name="age" id="age" value="<?php echo set_value('age'); ?>">
-            <div class="error"><?php echo form_error('age'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="income">Income:</label>
+                <input type="text" name="income" id="income">
+                <div class="error" id="incomeError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="income">Income:</label>
-            <input type="text" name="income" id="income" value="<?php echo set_value('income'); ?>">
-            <div class="error"><?php echo form_error('income'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="education">Education:</label>
+                <input type="text" name="education" id="education">
+                <div class="error" id="educationError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="education">Education:</label>
-            <input type="text" name="education" id="education" value="<?php echo set_value('education'); ?>">
-            <div class="error"><?php echo form_error('education'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select>
+                <div class="error" id="genderError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="gender">Gender:</label>
-            <select name="gender" id="gender">
-                <option value="" disabled selected>Select an option</option>
-                <option value="1" <?php echo set_select('gender', '1'); ?>>Male</option>
-                <option value="2" <?php echo set_select('gender', '2'); ?>>Female</option>
-            </select>
-            <div class="error"><?php echo form_error('gender'); ?></div>
-        </div>
+            <div class="form-group">
+                <label for="property_owner">Property Owner:</label>
+                <select name="property_owner" id="property_owner">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="1">Home</option>
+                    <option value="2">Land</option>
+                </select>
+                <div class="error" id="propertyOwnerError"></div>
+            </div>
 
-        <div class="form-group">
-            <label for="property_owner">Property Owner:</label>
-            <select name="property_owner" id="property_owner">
-                <option value="" disabled selected>Select an option</option>
-                <option value="1" <?php echo set_select('property_owner', '1'); ?>>Home</option>
-                <option value="2" <?php echo set_select('property_owner', '2'); ?>>Land</option>
-            </select>
-            <div class="error"><?php echo form_error('property_owner'); ?></div>
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password">
-            <div class="error"><?php echo form_error('password'); ?></div>
-        </div>
-
-        <button type="submit">Submit</button>
-
-        <?php echo form_close(); ?>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password">
+                <div class="error" id="passwordError"></div>
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#signupForm').on('submit', function(e) {
+    e.preventDefault(); // This should prevent the page from reloading
 
+    var formData = $(this).serialize(); // Serialize the form data
 
-    <!-- <script>
-        $(document).ready(function () {
-            $('#signupForm').on('submit', function (e) {
-                e.preventDefault(); // Prevent default form submission
+    $.ajax({
+        url: '<?php echo base_url('signup/submit'); ?>',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+            console.log("Response -->", response); // For debugging
 
-                $.ajax({
-                    url: "<?php echo base_url('signup/submit'); ?>", // Correct backend URL
-                    type: "POST",
-                    data: $(this).serialize(), // Serialize form data
-                    dataType: "json", // Expect a JSON response
-                    success: function (response) {
-                        if (response.status === 'success') {
-                            // Success message and redirect
-                            alert('Signup successful! Redirecting to dashboard...');
-                            window.location.href = "<?php echo base_url('dashboard'); ?>";
-                        } else if (response.status === 'error') {
-                            // Show validation errors
-                            $.each(response.errors, function (key, value) {
-                                $('#' + key + '_error').html(value);
-                            });
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(xhr.responseText); // Log server response for debugging
-                        alert('An error occurred: ' + error);
-                    }
+            if (response.status === 'error') {
+                // Clear previous error messages
+                $('.error').text('');
+                // Loop through each error and display it in the respective input field
+                $.each(response.errors, function(key, value) {
+                    $('#' + key + 'Error').text(value);
                 });
-            });
-        });
-    </script> -->
+            } else if (response.status === 'success') {
+                if (response.redirect) {
+                    console.log("Redirecting to: " + response.redirect); // For debugging
+                    // Redirect after success
+                    setTimeout(function() {
+                        window.location.href = response.redirect;
+                    }, 500); // Optional delay for better UX
+                } else {
+                    alert(response.message); // Display success message
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error: " + error);
+            console.error("Response: " + xhr.responseText);
+        }
+    });
+});
 
+});
+
+
+</script>
 </body>
 </html>
