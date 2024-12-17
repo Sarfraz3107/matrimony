@@ -55,7 +55,14 @@ $route['login'] = 'LoginController/index';
 $route['login/submit'] = 'LoginController/submit';
 $route['logout'] = 'LogoutController/index';  // Maps the logout URL to LogoutController
 
-$route['dashboard'] = 'DashboardController/index'; // This route should point to the Dashboard index method
+
+
+$route['dashboard'] = 'DashboardController/index'; // Default dashboard route
+$route['dashboard/index'] = 'DashboardController/index'; // Explicit index route
+$route['dashboard/index/(:num)'] = 'DashboardController/index/$1'; // Handle pagination
+
+
+// This route should point to the Dashboard index method
 $route['profile/details/(:num)'] = 'DashboardController/profile_details/$1';
 
 $route['profile'] = 'ProfileController/view';                // Profile page route

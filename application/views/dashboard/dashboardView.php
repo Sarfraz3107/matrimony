@@ -162,6 +162,51 @@ h3 {
 .popup-content button:hover {
     background-color: #45a049;
 }
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-container .pagination-item,
+.pagination-container .pagination-link {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.pagination-container .pagination-item:hover,
+.pagination-container .pagination-link:hover {
+    background-color: #45a049;
+    color: white;
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.pagination-container .pagination-item.current {
+    background-color: #4CAF50;
+    color: white;
+    pointer-events: none; /* Disable click on current page */
+}
+
+.pagination-container .pagination-item.next,
+.pagination-container .pagination-item.prev {
+    background-color: #ddd;
+    color: #555;
+}
+
+.pagination-container .pagination-item.next:hover,
+.pagination-container .pagination-item.prev:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
@@ -212,24 +257,30 @@ h3 {
     <?php if ($profiles): ?>
         <?php foreach ($profiles as $profile): ?>
             <div class="profile" id="profile-<?php echo $profile->id; ?>">
-    <div class="profile-details">
-        <p><strong>Name:</strong> <?php echo $profile->name; ?></p>
-        <p><strong>Age:</strong> <?php echo $profile->age; ?></p>
-        <p><strong>Gender:</strong> <?php echo $profile->gender_id  == 1 ? 'Male' : 'Female'; ?></p>
-        <!-- Link to the profile details page -->
-        <a href="<?php echo base_url('profile/details/' . $profile->id); ?>" class="btn">View Details</a>
-    </div>
-    <div class="profile-actions">
-        <?php if ($profile->interest_sent): ?>
-            <button class="btn btn-disabled" disabled>Already Interest Sent</button>
-        <?php else: ?>
-            <button class="btn send-interest-btn" data-profile-id="<?php echo $profile->id; ?>">Send Interest</button>
-        <?php endif; ?>
-    </div>
-</div>
+                <div class="profile-details">
+                    <p><strong>Name:</strong> <?php echo $profile->name; ?></p>
+                    <p><strong>Age:</strong> <?php echo $profile->age; ?></p>
+                    <p><strong>Gender:</strong> <?php echo $profile->gender_id  == 1 ? 'Male' : 'Female'; ?></p>
+                    <!-- Link to the profile details page -->
+                    <a href="<?php echo base_url('profile/details/' . $profile->id); ?>" class="btn">View Details</a>
+                </div>
+                <div class="profile-actions">
+                    <?php if ($profile->interest_sent): ?>
+                        <button class="btn btn-disabled" disabled>Already Interest Sent</button>
+                    <?php else: ?>
+                        <button class="btn send-interest-btn" data-profile-id="<?php echo $profile->id; ?>">Send Interest</button>
+                    <?php endif; ?>
+                </div>
+            </div>
         <?php endforeach; ?>
     <?php endif; ?>
+
+    <!-- Pagination Links -->
+    <div class="pagination-container">
+        <?php echo $pagination_links; ?>
+    </div>
 </div>
+
 
 <!-- Popup Modal -->
 <div id="popup">

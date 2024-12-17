@@ -249,7 +249,7 @@
 
                 <p><strong>Income:</strong> <?php echo isset($user->income) ? $user->income : 'N/A'; ?></p>
                 <p><strong>Education:</strong> <?php echo isset($user->education) ? $user->education : 'N/A'; ?></p>
-                <p><strong>Gender:</strong> <?php echo isset($user->gender) && $user->gender == '1' ? 'Male' : 'Female'; ?></p>
+                <p><strong>Gender:</strong> <?php echo isset($user->gender_id ) && $user->gender_id  == 1 ? 'Male' : 'Female'; ?></p>
                 <p><strong>Property Owner:</strong> <?php echo isset($user->property_owner) ? $user->property_owner : 'N/A'; ?></p>
                 <p><strong>Subscription Type:</strong> <?php echo isset($user->subscription_id) && $user->subscription_id == '1' ? 'Free' : 'Premium'; ?></p>
             </div>
