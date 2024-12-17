@@ -36,11 +36,6 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        /* Hover effect to lift the profile card */
-        /* .profile-card:hover {
-            transform: translateY(-10px);
-        } */
-
         .profile-card img {
             width: 120px;
             height: 120px;

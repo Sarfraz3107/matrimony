@@ -10,114 +10,7 @@ class DashboardController extends BaseController {
         $this->load->model('InterestModel');
         $this->load->model('UserModel');
         $this->load->library('pagination');
-        // Additional initialization if needed
     }
-
-    // public function index() {
-    //     $user_id = $this->session->userdata('user_id');
-    //     $user = $this->UserModel->get_user_by_id($user_id);
-
-        
-
-    //     // If the logged-in user is male, show only female profiles
-    //     if ($user->gender == '1') {
-    //         // Get all female profiles except the current user
-    //         $data['profiles'] = $this->UserModel->get_profiles_by_gender(2, $user_id);
-    //     } else {
-    //         // If the user is female, show all male profiles
-    //         $data['profiles'] = $this->UserModel->get_profiles_by_gender(1, $user_id);
-    //     }
-
-    //     $this->load->view('layouts/header');
-        
-    //     $this->load->view('dashboard/dashboardView', $data);
-    //     $this->load->view('layouts/footer');
-    // }
-
-    // public function index() {
-    //     $user_id = $this->session->userdata('user_id');
-    //     $user = $this->UserModel->get_user_by_id($user_id);
-    
-    //     if (!$user_id || !$user) {
-    //         redirect('login'); // Redirect to login if the user is not logged in
-    //     }
-    
-    //     // Determine the gender to fetch based on the user's gender
-    //     $gender_to_fetch = ($user->gender == '1') ? 2 : 1;
-    
-    //     // Fetch profiles of the opposite gender with interest status
-    //     $data['profiles'] = $this->InterestModel->get_profiles_with_interest_status_by_gender($user_id, $gender_to_fetch);
-    
-    //     // Load views
-    //     $this->load->view('layouts/header');
-    //     $this->load->view('partials/navbar');
-    //     $this->load->view('dashboard/dashboardView', $data);
-    //     $this->load->view('layouts/footer');
-    // }
-
-//     public function index() {
-//         $user_id = $this->session->userdata('user_id');
-//         $user = $this->UserModel->get_user_by_id($user_id);
-
-//         // var_dump($user);
-//         // echo $user;
-//         // die("something..");
-    
-//         if (!$user_id || !$user) {
-//             redirect('login'); // Redirect to login if the user is not logged in
-//         }
-    
-//         // Determine the gender to fetch based on the user's gender
-//         $gender_to_fetch = ($user->gender_id == '1') ? 2 : 1;
-
-//         // var_dump($gender_to_fetch);
-//         // echo  $gender_to_fetch;
-//         // die("something..");
-    
-//         // Pagination settings
-       
-    
-//         // Configuring pagination
-//         $config['base_url'] = base_url('dashboard/index');
-
-
-//         // var_dump("hii");
-//         // echo "hiii";
-//         // die("hii");
-//         $config['total_rows'] = $this->InterestModel->count_profiles_with_interest_status_by_gender($user_id, $gender_to_fetch); // Count total profiles for pagination
-
-//         // var_dump("hii");
-//         // echo "hiii";
-//         // die("hii");
-
-//         $config['per_page'] = 10; // Number of profiles per page
-//         $config['uri_segment'] = 3;
-//     // Segment in the URL where the page number is passed
-//         $config['num_links'] = 2;
-    
-//         $this->pagination->initialize($config);
-    
-//         // Get the current page from the URL
-//         $page = $this->uri->segment(3, 0);
-//         var_dump($page);
-//         die('Debug page segment');
-        
-//         // Fetch profiles with interest status based on pagination
-//         $data['profiles'] = $this->InterestModel->get_profiles_with_interest_status_by_gender($user_id, $gender_to_fetch, $config['per_page'], $page);
-        
-//         // var_dump($data);
-//         // print_r($data);
-//         // die("something went ..");
-
-//         // Pass pagination links to the view
-//         $data['pagination_links'] = $this->pagination->create_links();
-    
-//         // Load views
-//         $this->load->view('layouts/header');
-//         $this->load->view('partials/navbar');
-//         $this->load->view('dashboard/dashboardView', $data);
-//         $this->load->view('layouts/footer');
-// }
 
 
 
@@ -176,8 +69,8 @@ $config['num_tag_close'] = '</span>';
     $data['pagination_links'] = $this->pagination->create_links();
 
     // Load views
-    $this->load->view('layouts/header');
     $this->load->view('partials/navbar');
+    $this->load->view('layouts/header');
     $this->load->view('dashboard/dashboardView', $data);
     $this->load->view('layouts/footer');
 }

@@ -58,9 +58,6 @@ class InterestController extends BaseController {
             echo json_encode(['status' => 500, 'error' => $e->getMessage()]);
         }
     
-        // Clean and flush buffer
-        // $output = ob_get_clean();
-        // echo $output;
     }
 
     public function load_incoming_interests() {
@@ -118,7 +115,6 @@ class InterestController extends BaseController {
     public function sent_interests() {
         $sender_id = $this->session->userdata('user_id');
     
-        // Query to fetch all users to whom the logged-in user has sent an interest
         // Query to fetch all users to whom the logged-in user has sent an interest
         $this->db->select('interests.*, 
         users.id AS receiver_id, 

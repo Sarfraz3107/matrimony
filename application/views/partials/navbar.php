@@ -113,7 +113,6 @@
             </div>
 
             <ul class="nav-links">
-                <!-- Dashboard link (active on Dashboard page) -->
                 
                 
                 <!-- Conditional display for logged-in users -->

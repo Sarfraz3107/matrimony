@@ -160,16 +160,6 @@ nav ul li a:hover {
 </head>
 <body>
     <div class="container">
-        <!-- Navbar Section -->
-        <!-- <nav>
-            <ul>
-                <li><a href="<?= base_url('dashboard'); ?>">Dashboard</a></li>
-                <li><a href="<?= base_url('profile'); ?>">Profile</a></li>
-                <li><a href="<?= base_url('interests'); ?>" id="interests-btn">Interests</a></li>
-                <li><a href="<?= base_url('logout'); ?>">Logout</a></li>
-            </ul>
-        </nav> -->
-
         <!-- Section to View Incoming Interest Requests -->
         <div class="incoming-interests">
             <h2>Incoming Interest Requests</h2>

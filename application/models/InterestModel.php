@@ -33,31 +33,7 @@ class InterestModel extends CI_Model {
         return $this->db->insert('interests', $data);
     }
 
-    // public function get_profiles_with_interest_status_by_gender($user_id, $gender) {
-    //     // Select the user data and the interest count using JOIN
-    //     $this->db->select('users.*, 
-    //         IFNULL(COUNT(interests.id), 0) AS interest_sent'); // Use IFNULL to return 0 if no interests
-        
-    //     // From the 'users' table
-    //     $this->db->from('users');
-        
-    //     // Join with 'interests' table to get the count of interests
-    //     $this->db->join('interests', 'interests.receiver_id = users.id AND interests.sender_id = ' . $user_id, 'left');
-        
-    //     // Filter by gender and exclude the logged-in user
-    //     $this->db->where('users.gender_id', $gender);
-    //     $this->db->where('users.id !=', $user_id);
-    
-    //     // Group by user ID to count the number of interests
-    //     $this->db->group_by('users.id');
-        
-    //     // Execute the query
-    //     $query = $this->db->get();
-    
-    //     // Return the result as an array
-    //     return $query->result();
-    // }
-    
+
 
 
     public function get_profiles_with_interest_status_by_gender($user_id, $gender, $limit, $offset) {

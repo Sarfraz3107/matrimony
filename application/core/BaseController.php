@@ -7,11 +7,6 @@ class BaseController extends CI_Controller {
         $this->load->library('session');
         $this->load->helper('url');
 
-        // Load navbar only for non-AJAX requests
-        // if (!$this->input->is_ajax_request()) {
-        //     $this->load->view('partials/navbar');
-        // }
-
         $this->check_login();
     }
 

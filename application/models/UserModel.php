@@ -42,10 +42,6 @@ class UserModel extends CI_Model {
         return null;  // Return null if user not found
     }
 
-    // public function get_profiles_by_gender($gender, $exclude_user_id) {
-
-    //     return $this->db->get_where('users', ['gender' => $gender, 'id !=' => $exclude_user_id])->result();
-    // }
 
     public function updated_user_image($id, $file_path) {
         $data = [
