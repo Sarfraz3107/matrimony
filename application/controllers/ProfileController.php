@@ -49,7 +49,7 @@ class ProfileController extends BaseController {
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('age', 'Age', 'required|numeric');
-        $this->form_validation->set_rules('subscription_type', 'Subscription', 'required');
+        $this->form_validation->set_rules('subscription_id' , 'Subscription', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             // Reload edit view with validation errors
@@ -60,7 +60,7 @@ class ProfileController extends BaseController {
                 'name' => $this->input->post('name'),
                 'email' => $this->input->post('email'),
                 'age' => $this->input->post('age'),
-                'subscription_type' => $this->input->post('subscription_type'),
+                'subscription_id' => $this->input->post('subscription_id'),
             ];
 
             // Hash and update password if provided
@@ -76,7 +76,7 @@ class ProfileController extends BaseController {
                 // Update session data for immediate reflection
                 $this->session->set_userdata([
                     'name' => $formData['name'],
-                    'subscription_type' => $formData['subscription_type'],
+                    'subscription_id' => $formData['subscription_id'],
                 ]);
 
                 // Redirect to profile page with success message

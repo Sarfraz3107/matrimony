@@ -92,11 +92,11 @@
                 <label for="on_behalf">On Behalf:</label>
                 <select name="on_behalf" id="on_behalf">
                     <option value="" disabled selected>Select an option</option>
-                    <option value="Self">Self</option>
-                    <option value="Daughter">Daughter</option>
-                    <option value="Son">Son</option>
-                    <option value="Brother">Brother</option>
-                    <option value="Sister">Sister</option>
+                    <option value="1">Self</option>
+                    <option value="2">Daughter</option>
+                    <option value="3">Son</option>
+                    <option value="4">Brother</option>
+                    <option value="5">Sister</option>
                 </select>
                 <div class="error" id="onBehalfError"></div>
             </div>

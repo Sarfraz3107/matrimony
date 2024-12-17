@@ -225,12 +225,33 @@
                 <p><strong>Name:</strong> <?php echo isset($user->name) ? $user->name : 'N/A'; ?></p>
                 <p><strong>Email:</strong> <?php echo isset($user->email) ? $user->email : 'N/A'; ?></p>
                 <p><strong>Age:</strong> <?php echo isset($user->age) ? $user->age : 'N/A'; ?></p>
-                <p><strong>Marital Status:</strong> <?php echo isset($user->marital_status) && $user->marital_status == '0' ? 'Single' : 'Married'; ?></p>
+                <p><strong>Marital Status:</strong> 
+    <?php 
+        switch ($user->marital_status_id) {
+            case 1:
+                echo 'Never Married ';
+                break;
+            case 2:
+                echo 'Married';
+                break;
+            case 3:
+                echo 'Divorced';
+                break;
+            case 4:
+                echo 'Separated';
+                break;
+            default:
+                echo 'Unknown'; // In case there's an invalid value
+                break;
+        }
+    ?>
+</p>
+
                 <p><strong>Income:</strong> <?php echo isset($user->income) ? $user->income : 'N/A'; ?></p>
                 <p><strong>Education:</strong> <?php echo isset($user->education) ? $user->education : 'N/A'; ?></p>
                 <p><strong>Gender:</strong> <?php echo isset($user->gender) && $user->gender == '1' ? 'Male' : 'Female'; ?></p>
                 <p><strong>Property Owner:</strong> <?php echo isset($user->property_owner) ? $user->property_owner : 'N/A'; ?></p>
-                <p><strong>Subscription Type:</strong> <?php echo isset($user->subscription_type) ? $user->subscription_type : 'N/A'; ?></p>
+                <p><strong>Subscription Type:</strong> <?php echo isset($user->subscription_id) && $user->subscription_id == '1' ? 'Free' : 'Premium'; ?></p>
             </div>
             <div class="btn">
             <a href="<?php echo base_url('profile/edit'); ?>" class="edit-btn">Edit Profile</a>

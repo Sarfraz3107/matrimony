@@ -180,19 +180,19 @@
     <!-- Display profile data or "Not Available" if missing -->
     <p><strong>Name:</strong> <?php echo $profile->name ? $profile->name : 'Not Available'; ?></p>
     <p><strong>Age:</strong> <?php echo $profile->age ? $profile->age : 'Not Available'; ?></p>
-    <p><strong>Gender:</strong> <?php echo $profile->gender == 1 ? 'Male' : ($profile->gender == 2 ? 'Female' : 'Not Available'); ?></p>
+    <p><strong>Gender:</strong> <?php echo $profile->gender_id  == 1 ? 'Male' : 'Femal'; ?></p>
     <p><strong>Income:</strong> <?php echo $profile->income ? $profile->income : 'Not Available'; ?></p>
     <p><strong>Email:</strong> <?php echo $profile->email ? $profile->email : 'Not Available'; ?></p>
 
     <p><strong>Marital Status:</strong> 
     <?php 
-        if ($profile->marital_status == 1) {
+        if ($profile->marital_status_id == 1) {
             echo 'Never Married';
-        } elseif ($profile->marital_status == 2) {
+        } elseif ($profile->marital_status_id == 2) {
             echo 'Married';
-        } elseif ($profile->marital_status == 3) {
+        } elseif ($profile->marital_status_id == 3) {
             echo 'Divorced';
-        } elseif ($profile->marital_status == 4) {
+        } elseif ($profile->marital_status_id == 4) {
             echo 'Rejected';
         } else {
             echo 'Not Available';
@@ -205,7 +205,31 @@
 
     <!-- Hidden Premium Details for both Free and Premium users -->
     <div id="premiumDetails" class="premium-details">
-        <p><strong>On Behalf:</strong> <?php echo $profile->on_behalf ? $profile->on_behalf : 'Not Available'; ?></p>
+    <p><strong>On Behalf:</strong> 
+    <?php 
+        switch ($profile->on_behalf_id) {
+            case 1:
+                echo 'Self';
+                break;
+            case 2:
+                echo 'Daughter';
+                break;
+            case 3:
+                echo 'Son';
+                break;
+            case 4:
+                echo 'Brother';
+                break;
+            case 5:
+                echo 'Sister';
+                break;
+            default:
+                echo 'Not Available'; // In case there is no valid value
+                break;
+        }
+    ?>
+</p>
+
         <p><strong>Education:</strong> <?php echo $profile->education ? $profile->education : 'Not Available'; ?></p>
         <p><strong>Property Owner:</strong> <?php echo $profile->property_owner ? ($profile->property_owner == 1 ? 'Home' : 'Land') : 'Not Available'; ?></p>
     </div>
@@ -228,7 +252,7 @@
 <script>
     // Function to reveal premium details
     function revealPremiumDetails() {
-        <?php if ($this->session->userdata('subscription_type') == 'premium'): ?>
+        <?php if ($this->session->userdata('subscription_id') == '2'): ?>
             // If the user is premium, show the details
             document.getElementById("premiumDetails").style.display = "block";
         <?php else: ?>

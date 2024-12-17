@@ -215,7 +215,7 @@ h3 {
     <div class="profile-details">
         <p><strong>Name:</strong> <?php echo $profile->name; ?></p>
         <p><strong>Age:</strong> <?php echo $profile->age; ?></p>
-        <p><strong>Gender:</strong> <?php echo $profile->gender == 1 ? 'Male' : 'Female'; ?></p>
+        <p><strong>Gender:</strong> <?php echo $profile->gender_id  == 1 ? 'Male' : 'Female'; ?></p>
         <!-- Link to the profile details page -->
         <a href="<?php echo base_url('profile/details/' . $profile->id); ?>" class="btn">View Details</a>
     </div>

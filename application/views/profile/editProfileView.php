@@ -117,10 +117,10 @@
                 <input type="number" name="age" id="age" class="form-control" value="<?php echo $user->age; ?>" required>
             </div>
             <div class="form-group">
-                <label for="subscription_type">Subscription Type</label>
-                <select name="subscription_type" id="subscription_type" class="form-control">
-                    <option value="free" <?php echo $user->subscription_type == 'free' ? 'selected' : ''; ?>>Free</option>
-                    <option value="premium" <?php echo $user->subscription_type == 'premium' ? 'selected' : ''; ?>>Premium</option>
+                <label for="subscription_id">Subscription Type</label>
+                <select name="subscription_id" id="subscription_id" class="form-control">
+                    <option value="1" <?php echo $user->subscription_id == 1 ? 'selected' : ''; ?>>Free</option>
+                    <option value="2" <?php echo $user->subscription_id == 2 ? 'selected' : ''; ?>>Premium</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Update Profile</button>
