@@ -24,6 +24,9 @@ class BaseController extends CI_Controller {
                 redirect('login');
             }
         }
+
+        $this->validate_session();
+
     }
     
 

@@ -164,13 +164,14 @@
             console.log("Response -->", response); // For debugging
 
             if (response.status === 'error') {
-                // Clear previous error messages
-                $('.error').text('');
-                // Loop through each error and display it in the respective input field
-                $.each(response.errors, function(key, value) {
-                    $('#' + key + 'Error').text(value);
-                });
-            } else if (response.status === 'success') {
+    // Clear previous error messages
+    $('.error').html('');  // Use .html() to clear any HTML content
+    
+    // Loop through each error and display it in the respective input field
+    $.each(response.errors, function(key, value) {
+        $('#' + key + 'Error').html(value);  // Use .html() to insert HTML
+    });
+} else if (response.status === 'success') {
                 if (response.redirect) {
                     console.log("Redirecting to: " + response.redirect); // For debugging
                     // Redirect after success
