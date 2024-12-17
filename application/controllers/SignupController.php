@@ -265,9 +265,8 @@ class SignupController extends CI_Controller {
             }
     
             // After inserting the user, update gender and marital status
-            // $this->SearchModel->insert_or_update_user($user_id, $gender, $marital_status);
+            $this->SearchModel->add_user_to_search_table($user_id, $gender, $marital_status);
     
-            log_message('debug', 'User created with ID: ' . $user_id);
     
             // Set session data and return success response
             $user_data = [

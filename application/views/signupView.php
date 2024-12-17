@@ -184,7 +184,7 @@
         },
         error: function(xhr, status, error) {
             console.error("AJAX Error: " + error);
-            console.error("Response: " + xhr.responseText);
+            console.error("Response: " + xhr);
         }
     });
 });
